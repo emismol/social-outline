@@ -1,35 +1,15 @@
 //create model
-const { Model, DataTypes } = require("mongoose");
-const mongoose = require("../config/config.js");
-class user extends Model {}
-user.init(
-  //create schema
-  {
-    username: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      primaryKey: true,
-      autoIncrement: true,
-    },
-    email: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    thoughts: {
-      type: DataTypes.STRING,
-      // allowNull: false
-    },
-    friends: {
-      type: DataTypes.STRING,
-      // allowNull: false
-    },
+const { Schema, model } = require("mongoose");
+
+//create schema
+const UserSchema = new Schema({
+  username: {
+    type: String,
   },
-  {
-    mongoose,
-    timestamps: true,
-    freezeTableName: true,
-    underscored: true,
-    modelName: "user",
-  }
-);
-module.exports = User;
+  email: {
+    type: String,
+  },
+  thoughts: {},
+  friends: {},
+});
+module.exports = mongoose.model("User", UserSchema);
