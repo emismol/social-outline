@@ -1,10 +1,9 @@
-const { user } = require("../models");
+const { User } = require("../models");
 
 const userController = {
   // get all users
   getAllUser(req, res) {
-    user
-      .find({})
+    User.find()
       .then((dbUserData) => res.json(dbUserData))
       .catch((err) => {
         console.log(err);
@@ -27,6 +26,10 @@ const userController = {
         console.log(err);
         res.status(400).json(err);
       });
+  },
+  createUser(req, res) {
+    console.log(req.body);
+    User.create(req.body).then((userData) => res.json(userData));
   },
 };
 

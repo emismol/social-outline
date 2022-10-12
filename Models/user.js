@@ -9,7 +9,18 @@ const UserSchema = new Schema({
   email: {
     type: String,
   },
-  thoughts: {},
-  friends: {},
+  thoughts: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Thought",
+    },
+  ],
+  friends: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "User",
+    },
+  ],
 });
-module.exports = mongoose.model("User", UserSchema);
+const User = model("User", UserSchema);
+module.exports = User;
