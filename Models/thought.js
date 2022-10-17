@@ -11,14 +11,14 @@ const ThoughtSchema = new Schema({
     min: 1,
     max: 280,
   },
-  createdAt{
+  createdAt: {
     type: Number,
-    default: (new Date()).getTime(),
+    default: new Date().getTime(),
   },
-  reactions{
+  reactions: {
     type: Schema.Types.ObjectId,
-      ref: "Reactions",
-  }
+    ref: "Reactions",
+  },
 });
 const Thought = model("Thought", ThoughtSchema);
 module.exports = Thought;
