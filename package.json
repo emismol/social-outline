@@ -4,7 +4,8 @@
     "mongoose": "^6.6.5"
   },
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js",
+    "dev": "npx nodemon ."
   },
   "name": "social-outline",
   "description": "",

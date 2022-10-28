@@ -31,6 +31,45 @@ const userController = {
     console.log(req.body);
     User.create(req.body).then((userData) => res.json(userData));
   },
+  updateUser({ params, body }, res) {
+    User.findByIdAndUpdate(params.id, body)
+      .then(() => {
+        User.findOne({ _id: params.id })
+          .then((dbUserData) => {
+            // If no user is found, send 404
+            if (!dbUserData) {
+              res.status(404).json({ message: "No user found with this id!" });
+              return;
+            }
+            res.json(dbUserData);
+          })
+          .catch((err) => {
+            console.log(err);
+            res.status(400).json(err);
+          });
+      })
+      .catch((err) => {
+        console.log(err);
+        res.status(400).json(err);
+      });
+  },
+  deleteUser({ params }, res) {
+    User.findOne({ _id: params.id })
+      .then((dbUserData) => {
+        // If no user is found, send 404
+        if (!dbUserData) {
+          res.status(404).json({ message: "No user found with this id!" });
+          return;
+        }
+        dbUserData.delete().then(() => {
+          res.json(dbUserData);
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+        res.status(400).json(err);
+      });
+  },
 };
 
 module.exports = userController;
