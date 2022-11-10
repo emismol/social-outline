@@ -54,8 +54,10 @@ const userController = {
       });
   },
   deleteUser({ params }, res) {
+    console.log("params line 57 user-controller", params);
     User.findOne({ _id: params.id })
       .then((dbUserData) => {
+        console.log("dbUserData line 60 user-controller", dbUserData);
         // If no user is found, send 404
         if (!dbUserData) {
           res.status(404).json({ message: "No user found with this id!" });
